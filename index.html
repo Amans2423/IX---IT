@@ -1,290 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Office Tools – Writer, Calc, Impress (Olympiad Concepts + Quiz)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6fb;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 20px auto;
-      background: white;
-      padding: 20px 30px;
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-      color: #1d3557;
-    }
-
-    h2 {
-      border-left: 5px solid #457b9d;
-      padding-left: 10px;
-      margin-top: 25px;
-      color: #1d3557;
-    }
-
-    ul {
-      margin-left: 20px;
-      line-height: 1.6;
-    }
-
-    .section {
-      background: #f8fbff;
-      padding: 12px 18px;
-      border-radius: 10px;
-      margin-top: 10px;
-      border: 1px solid #e3e9f5;
-    }
-
-    /* QUIZ */
-    .question-card {
-      margin: 12px 0;
-      padding: 12px;
-      border-radius: 8px;
-      background: #f9fbff;
-      border: 1px solid #dce6ff;
-    }
-    .question-card.correct { background: #e6ffe8; border-color: #47c160; }
-    .question-card.incorrect { background: #ffeaea; border-color: #ff6363; }
-
-    .feedback { margin-top: 5px; font-size: 14px; }
-    .feedback.correct-text { color: #2b8a3e; }
-    .feedback.incorrect-text { color: #b00020; }
-
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 6px;
-      background: #457b9d;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background: #1d3557;
-    }
-
-    #result {
-      margin-top: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #1d3557;
-      display: none;
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class IX IT Practice Quiz</title>
+<style>
+:root{--blue:#1d4ed8;--navy:#172554;--line:#dbe4f0;--ink:#172033;--muted:#64748b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eaf2ff,#f7f8fc 55%,#e8fbf5);font:16px/1.5 Arial, sans-serif;color:var(--ink)}
+header{background:linear-gradient(120deg,#172554,#1d4ed8);color:white;text-align:center;padding:28px 16px}header h1{margin:8px 0;font-size:clamp(1.6rem,4vw,2.4rem)}header p{margin:0;color:#dbeafe}
+main{max-width:900px;margin:22px auto;padding:0 14px 40px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 8px 24px #1e3a5f0c}
+h2{margin:0 0 14px;color:var(--navy);font-size:1.25rem}.fields{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+label{font-weight:700;font-size:.92rem}input,select{display:block;width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font:inherit;margin-top:5px}
+.progressline{display:flex;justify-content:space-between;gap:10px;font-size:.9rem;color:var(--muted);margin-bottom:8px}.bar{height:9px;background:#e2e8f0;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#2563eb,#14b8a6)}
+.topic{display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:20px;padding:4px 10px;font-size:.78rem;margin-bottom:10px}
+.qhead{display:flex;gap:10px;align-items:flex-start}.number{display:grid;place-items:center;min-width:34px;height:34px;background:#dbeafe;color:#1d4ed8;border-radius:10px;font-weight:800}.question{font-size:1.08rem;font-weight:750;margin:3px 0 15px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:9px}.option{display:flex;gap:9px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-weight:400}.option input{width:auto;margin:4px 0 0;accent-color:var(--blue)}.option.correct{background:#f0fdf4;border-color:#86efac}.option.wrong{background:#fff1f2;border-color:#fca5a5}
+.feedback{display:none;padding:13px;margin-top:13px;border-radius:10px}.feedback.show{display:block}.feedback.good{background:#f0fdf4;border-left:4px solid #22c55e}.feedback.bad{background:#fff1f2;border-left:4px solid #ef4444}.feedback strong{display:block;margin-bottom:5px}
+button{border:0;border-radius:10px;padding:12px 17px;font:inherit;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:white}.secondary{background:#e2e8f0;color:#1e293b}.primary:disabled{opacity:.45;cursor:not-allowed}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.hint,.muted{color:var(--muted);font-size:.9rem}
+#result{display:none}.hero{text-align:center;padding:20px;background:linear-gradient(135deg,#eff6ff,#ecfdf5);border-radius:12px}.score{font-size:3rem;font-weight:900;color:#1d4ed8}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.stat{text-align:center;padding:12px;background:#f8fafc;border:1px solid var(--line);border-radius:10px}.stat strong{display:block;font-size:1.4rem}.review{padding:12px 0;border-bottom:1px solid var(--line)}#finalNote{margin-top:20px;padding:16px;text-align:center;border:2px dashed #f59e0b;border-radius:12px;background:#fffbeb;color:#92400e;font-weight:900;animation:blink 1s steps(2,start) infinite}@keyframes blink{to{visibility:hidden}}footer{text-align:center;color:var(--muted);font-size:.85rem;padding:12px}
+@media(max-width:620px){.fields,.options{grid-template-columns:1fr}.card{padding:15px}.stats{grid-template-columns:1fr 1fr}}
+@media print{body{background:white}header{background:white;color:#111}header p{color:#333}#studentCard,#progressCard,#quizCard,.no-print,footer{display:none!important}#result{display:block!important;box-shadow:none}.card{box-shadow:none}}
+</style>
 </head>
-
 <body>
-<div class="container">
-
-<h1>Office Tools – Concepts + Olympiad Level Quiz</h1>
-
-<!-- SECTION 1 -->
-<h2>1. Licensed, Proprietary and Open-Source Software</h2>
-<div class="section">
-<ul>
-<li><b>Licensed Software:</b> Paid software; you must buy a license to use it (e.g., MS Office).</li>
-<li><b>Proprietary Software:</b> Owned by a company; source code not available.</li>
-<li><b>Open-Source Software:</b> Free to use; source code available (e.g., OpenOffice, LibreOffice).</li>
-<li><b>Freeware:</b> Free to use but cannot modify (e.g., Adobe Reader).</li>
-<li><b>Shareware:</b> Trial version, limited time use.</li>
-<li><b>Examples in real life:</b> Linux (open-source), Windows (proprietary), VLC player (open-source).</li>
-</ul>
-</div>
-
-<!-- SECTION 2 -->
-<h2>2. Writer (Word Processor)</h2>
-<div class="section">
-<ul>
-<li>Create text documents (letters, reports, assignments).</li>
-<li>Saving in multiple formats (.odt, .docx, .pdf).</li>
-<li><b>Formatting:</b> Bold, Italic, Underline, Font size, Alignment.</li>
-<li><b>Page formatting:</b> Margins, Header, Footer, Page numbering.</li>
-<li><b>Printing options:</b> Print all pages, selected pages, preview.</li>
-<li><b>Mail Merge:</b> Auto-filling names & data into letters.</li>
-<li><b>Toolbars:</b> Standard, Formatting, Table toolbar.</li>
-<li><b>Shortcut keys:</b> Ctrl+S (Save), Ctrl+P (Print), Ctrl+B (Bold), Ctrl+Z (Undo).</li>
-</ul>
-</div>
-
-<!-- SECTION 3 -->
-<h2>3. CALC (Spreadsheet)</h2>
-<div class="section">
-<ul>
-<li><b>Cell:</b> Single box in spreadsheet.</li>
-<li><b>Cell Address:</b> Column letter + Row number (e.g., A1, C5).</li>
-<li><b>Formula:</b> Begins with '=' sign.</li>
-<li><b>Common formulas:</b> =SUM(A1:A5), =AVERAGE(B1:B4).</li>
-<li><b>Formatting:</b> Borders, background color, number formats.</li>
-<li><b>Toolbars:</b> Formula bar, Standard toolbar, Formatting toolbar.</li>
-<li>Charts/Graphs can be created from data.</li>
-</ul>
-</div>
-
-<!-- SECTION 4 -->
-<h2>4. Impress (Presentation Software)</h2>
-<div class="section">
-<ul>
-<li><b>Slide:</b> One page in a presentation.</li>
-<li><b>Transitions:</b> Animation effects applied between slides.</li>
-<li><b>Views:</b> Normal view, Slide sorter, Slide show view.</li>
-<li><b>Shortcuts:</b> F5 (Start slideshow), Ctrl+M (New slide).</li>
-<li><b>Saving, Opening, Closing:</b> Save → .odp or .pptx.</li>
-<li><b>Toolbars:</b> Slides pane, Tasks pane, Formatting, Drawing toolbar.</li>
-<li><b>Printing:</b> Print slides, handouts, notes.</li>
-</ul>
-</div>
-
-<!-- QUIZ SECTION -->
-<h2>50 Questions – MCQ Quiz</h2>
-
-<div id="quiz"></div>
-
-<button onclick="submitQuiz()">Submit Quiz</button>
-<button onclick="resetQuiz()">Reset</button>
-
-<div id="result"></div>
-
-</div>
-
+<header><div>CBSE • INFORMATION TECHNOLOGY</div><h1>Class IX — IT Practice Quiz</h1><p>LibreOffice Writer &amp; Calc · 20 MCQs · Instant Feedback</p></header>
+<main>
+<section class="card" id="studentCard"><h2>👩‍🎓 Student Details</h2><div class="fields">
+<label>Student Name<input id="studentName" placeholder="Enter your full name" autocomplete="name"></label>
+<label>Class<select id="studentClass"><option>IX</option></select></label>
+<label>Section<select id="studentSection"><option value="">Select</option><option>A</option><option>B</option><option>C</option><option>D</option><option>Other</option></select></label>
+</div><p class="muted">Select an answer. Feedback appears instantly, and the next question opens automatically after a short pause.</p></section>
+<section class="card" id="progressCard"><div class="progressline"><b id="stepLabel">Question 1 of 20</b><span id="liveScore">Score: 0</span></div><div class="bar"><span id="barFill"></span></div></section>
+<section class="card" id="quizCard"><div id="quiz"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="buttons" style="display:none"><button class="primary" id="nextBtn" disabled>Next Question →</button></div></section>
+<section class="card" id="result"><h2>🏆 Your Scorecard</h2><div class="hero"><p id="studentLine"></p><div class="score" id="scoreNumber">0/20</div><div id="scoreMessage"></div></div><div class="stats"><div class="stat"><strong id="correctCount">0</strong>Correct</div><div class="stat"><strong id="wrongCount">0</strong>Incorrect</div><div class="stat"><strong id="percentCount">0%</strong>Percentage</div></div><h2>Question Review</h2><div id="review"></div><div id="finalNote">📸 NOTE: SEND THIS ORIGINAL SCREENSHOT TO YOUR TEACHER 📸<br>🪔 HAPPY DHANTERAS! 🪔</div><div class="buttons no-print"><button class="primary" onclick="window.print()">Print / Save Scorecard as PDF</button><button class="secondary" id="tryAgainBtn">Try Again</button></div></section>
+<footer>Learn from every answer — keep practising! ✨</footer>
+</main>
 <script>
-const quizData = [
-  {q:"1. Which software type allows full access to modify its code?",o:["Licensed","Proprietary","Open-Source","Shareware"],a:2},
-  {q:"2. MS Office is an example of:",o:["Open-Source","Freeware","Proprietary","Shareware"],a:2},
-  {q:"3. LibreOffice is:",o:["Paid software","Proprietary","Open-Source","Shareware"],a:2},
-  {q:"4. A trial version of software is called:",o:["Freeware","Open-Source","Shareware","Licensed"],a:2},
-  {q:"5. Ctrl + S is used for:",o:["Save","Print","Cut","Paste"],a:0},
-  {q:"6. Writer saves default files as:",o:[".docx",".txt",".odt",".pdf"],a:2},
-  {q:"7. What is Mail Merge used for?",o:["Charts","Letters with auto-inserted data","Slides","Animations"],a:1},
-  {q:"8. Which toolbar shows fonts & sizes?",o:["Standard","Formatting","Status bar","Title bar"],a:1},
-  {q:"9. Shortcut for Bold:",o:["Ctrl+U","Ctrl+B","Ctrl+M","Ctrl+Shift+B"],a:1},
-  {q:"10. Print Preview is used to:",o:["Edit text","Check layout before printing","Insert pictures","Save document"],a:1},
-
-  {q:"11. A spreadsheet cell address is:",o:["Row+Column","Letter+Number","Number+Letter","Only number"],a:1},
-  {q:"12. Formula begins with:",o:["+", "-", "=", "*"],a:2},
-  {q:"13. SUM function is used for:",o:["Multiplication","Addition","Power","Division"],a:1},
-  {q:"14. A group of cells is called:",o:["Block","Range","Sheet","Cluster"],a:1},
-  {q:"15. Calc file extension:",o:[".ods",".docx",".xlsx",".pptx"],a:0},
-  {q:"16. The bar used to type formulas:",o:["Menu bar","Formula bar","Title bar","Status bar"],a:1},
-  {q:"17. A spreadsheet intersection is:",o:["Row","Column","Cell","Page"],a:2},
-  {q:"18. Chart allows:",o:["Playing music","Visual data display","Printing images","Text only"],a:1},
-  {q:"19. Shortcut for new spreadsheet:",o:["Ctrl+N","Ctrl+Shift+N","Ctrl+Alt+N","Shift+N"],a:0},
-  {q:"20. =AVERAGE(10,20,30) gives:",o:["20","30","10","60"],a:0},
-
-  {q:"21. Presentation slides are created in:",o:["Writer","Impress","Calc","Paint"],a:1},
-  {q:"22. Slide transition means:",o:["New slide","Effect between slides","Font change","Printing"],a:1},
-  {q:"23. Shortcut to run slideshow:",o:["Ctrl+S","Ctrl+M","F5","Shift+F5"],a:2},
-  {q:"24. Slide sorter view shows:",o:["Full screen","Slides in grid","Only one slide","Toolbar"],a:1},
-  {q:"25. Impress default extension:",o:[".ppt",".odp",".odt",".pptm"],a:1},
-  {q:"26. Insert new slide with:",o:["Ctrl+M","Ctrl+Shift+S","Alt+N","Ctrl+Alt+M"],a:0},
-  {q:"27. Notes in slides are used by:",o:["Audience","Presenter","System","Camera"],a:1},
-  {q:"28. Slide background change is in:",o:["Format menu","Insert menu","Tools menu","View menu"],a:0},
-  {q:"29. Animation is applied to:",o:["Text or objects","Only images","Only headings","Only bullets"],a:0},
-  {q:"30. Handouts print:",o:["Only text","Multiple slides per page","Only images","Only tables"],a:1},
-
-  {q:"31. Licensed software means:",o:["Open for all","Requires purchase","Trial only","Only for mobile"],a:1},
-  {q:"32. OpenOffice is:",o:["Paid","Closed source","Open-Source","Not software"],a:2},
-  {q:"33. Writer is used for:",o:["Math","Slides","Text documents","Music"],a:2},
-  {q:"34. Header appears on:",o:["Bottom","Top of page","Left only","Right only"],a:1},
-  {q:"35. CALC handles:",o:["Text only","Numbers & formulas","Videos","Code"],a:1},
-  {q:"36. Column label B and row 10 means:",o:["B9","10B","B10","BB10"],a:2},
-  {q:"37. Impress is similar to:",o:["MS Excel","MS PowerPoint","MS Word","MS Paint"],a:1},
-  {q:"38. In mail merge, data table is called:",o:["File","Database","Sheet","Form"],a:1},
-  {q:"39. Which is NOT a spreadsheet formula?",o:["=SUM()","=AVERAGE()","=FONT()","=MAX()"],a:2},
-  {q:"40. Which shows slide thumbnails?",o:["Task Pane","Slides Pane","Toolbar","Sidebar"],a:1},
-
-  {q:"41. Writer alignment shortcut Ctrl+E means:",o:["Left","Center","Right","Justify"],a:1},
-  {q:"42. Formula for total of A1 to A5:",o:["=TOTAL(A1-A5)","=SUM(A1:A5)","=ADD(A1,A5)","=A1+A5+"],a:1},
-  {q:"43. Presentation full-screen is:",o:["Normal View","Slide Sorter","Slide Show","Edit View"],a:2},
-  {q:"44. Document red underline means:",o:["Grammar error","Picture size","Border","Format error"],a:0},
-  {q:"45. Calc sheet tab appears:",o:["Center","Bottom","Top","Left"],a:1},
-  {q:"46. Impress text box is inserted from:",o:["View","Tools","Insert","File"],a:2},
-  {q:"47. Writer table is inserted from:",o:["Tools","Insert","Format","Slide"],a:1},
-  {q:"48. Spreadsheet default rows × columns approx:",o:["1×1","100×100","1000×100","Millions"],a:3},
-  {q:"49. Software that is free + source visible:",o:["Proprietary","Open-Source","Shareware","Trialware"],a:1},
-  {q:"50. Impress transition speed is found in:",o:["Slide transition panel","File menu","Format menu","Tools panel"],a:0}
+const questions=[
+{t:"Writer — Basics",q:"What happens when you press Ctrl + N in LibreOffice Writer?",o:["A new document opens","The current document is printed","The document is closed","A document is saved"],a:0,e:"Ctrl + N creates a new document."},
+{t:"Writer — Basics",q:"Which toolbar usually contains Bold, Italic, Underline, font name and font size controls?",o:["Drawing toolbar","Formatting toolbar","Status bar","Formula bar"],a:1,e:"The Formatting toolbar contains common text-formatting controls such as font, size, bold, italic and alignment."},
+{t:"Writer — Basics",q:"How can you export a Writer document as a PDF using the menus?",o:["Edit → Paste Special","View → Full Screen","File → Export As → Export as PDF","Tools → Spelling"],a:2,e:"Use File → Export As → Export as PDF. Some versions also have a direct PDF export button."},
+{t:"Writer — Basics",q:"What is the main difference between Save and Save As?",o:["They always do exactly the same thing","Save deletes the file; Save As prints it","Save only works for PDFs","Save updates the current file; Save As lets you choose a name, location or format"],a:3,e:"Save updates the existing file. Save As lets you save with a different name, location or file format."},
+{t:"Writer — Basics",q:"In the standard desktop interface, AutoText is accessed from which menu?",o:["Tools → AutoText","Window → AutoText","Format → AutoText","Table → AutoText"],a:0,e:"AutoText is available under Tools → AutoText in the standard menu layout."},
+{t:"Writer — Basics",q:"Which keyboard shortcut opens the AutoText dialog in Writer?",o:["Ctrl + F2","Ctrl + F3","Ctrl + Shift + S","Alt + F4"],a:1,e:"Ctrl + F3 opens the AutoText dialog.",n:true},
+{t:"Writer — Find and Replace",q:"Which shortcut opens Find and Replace in Writer?",o:["Ctrl + P","Ctrl + H","Ctrl + M","Ctrl + L"],a:1,e:"Ctrl + H opens the Find and Replace dialog."},
+{t:"Writer — Find and Replace",q:"What does Replace All do?",o:["Replaces only the next match","Deletes the whole document","Replaces every matching occurrence in the search scope","Changes page orientation"],a:2,e:"Replace All replaces every matching occurrence of the searched text in the search scope."},
+{t:"Writer — Tables and Printing",q:"Which menu is commonly used to insert a table in Writer?",o:["Insert → Table","Tools → Table","Window → Table","Help → Table"],a:0,e:"Choose Insert → Table, then select the required rows and columns."},
+{t:"Writer — Tables and Printing",q:"Which shortcut opens the Print dialog in Writer?",o:["Ctrl + S","Ctrl + E","Ctrl + P","Ctrl + T"],a:2,e:"Ctrl + P opens the Print dialog."},
+{t:"Writer — Tables and Printing",q:"Which option changes a page from Portrait to Landscape?",o:["Font Effects","Page Style / Page Properties","Find and Replace","AutoText"],a:1,e:"Change page orientation in Page Style or Page Properties; wording varies by version."},
+{t:"Calc — Basics",q:"In LibreOffice Calc, what is a cell?",o:["A complete worksheet","The intersection of a row and a column","A chart title","A type of font"],a:1,e:"A cell is where a row and a column meet, such as A1."},
+{t:"Calc — Basics",q:"Which is a valid cell address in Calc?",o:["1A","AA-1","A1","RowA"],a:2,e:"A cell address uses the column letter followed by the row number, for example A1 or C5."},
+{t:"Calc — Basics",q:"Which symbol usually begins a formula in Calc?",o:["=","#","@","&"],a:0,e:"Calc formulas begin with an equals sign, for example =A1+B1."},
+{t:"Calc — Basics",q:"What is the intersection of a row and a column called?",o:["Range","Workbook","Cell","Sheet tab"],a:2,e:"The intersection of a row and a column is a cell."},
+{t:"Calc — Working with Data",q:"Which feature arranges data in alphabetical or numerical order?",o:["Sorting","Zoom","AutoText","Page Border"],a:0,e:"Sorting arranges data in ascending or descending order.",n:true},
+{t:"Calc — Working with Data",q:"What does the SUM function do?",o:["Counts only text cells","Adds numbers","Changes text to uppercase","Finds duplicate formatting"],a:1,e:"SUM adds numbers, for example =SUM(A1:A5)."},
+{t:"Calc — Working with Data",q:"What does the range A1:A5 refer to?",o:["Only cell A1","Cells A1 and A5 only","All cells from A1 through A5","The whole column A"],a:2,e:"A1:A5 means the continuous range A1, A2, A3, A4 and A5."},
+{t:"Calc — Working with Data",q:"Which feature can show only rows that meet selected conditions?",o:["Filter","Word Count","Track Changes","Page Break"],a:0,e:"Filters display records matching selected conditions while temporarily hiding other rows.",n:true},
+{t:"Calc — Working with Data",q:"Which file format is the default for a LibreOffice Calc spreadsheet?",o:[".odt",".odp",".ods",".odb"],a:2,e:"ODS is Calc’s native spreadsheet format. ODT is for text documents and ODP is for presentations."}
 ];
-
-function loadQuiz() {
-  const quiz = document.getElementById("quiz");
-  quiz.innerHTML = "";
-  quizData.forEach((item, i) => {
-    const div = document.createElement("div");
-    div.className = "question-card";
-    div.dataset.index = i;
-
-    div.innerHTML = `
-      <p><b>${item.q}</b></p>
-      ${item.o.map((opt, idx) =>
-        `<label><input type="radio" name="q${i}" value="${idx}"> ${opt}</label><br>`
-      ).join("")}
-    `;
-
-    quiz.appendChild(div);
-  });
+const comic=[
+"{name}, that answer took a scenic route and missed the destination! 😄",
+"Oh {name}! Even the options were giving you hints. 👀",
+"{name}, your finger answered faster than your brain could hold a meeting! 😂",
+"Plot twist, {name}: that option looked confident, but it wasn't correct! 🎭",
+"{name}, the correct option was waving at you! 👋",
+"Oops, {name}! That click needs a tiny software update. 🔄",
+"{name}, let's bring the right answer back with this explanation! 📘",
+"Dear {name}, bold attempt! Sadly, bold doesn't make an answer correct. 😅",
+"{name}, wrong turn! The correct answer is your U-turn. 🚗",
+"Not this time, {name}! Let's turn this mistake into a mark next time. 💡",
+"{name}, your confidence is impressive; let's get the answer to match it! 😎",
+"A brave guess, {name}! The correct answer has entered the classroom. 🎓",
+"{name}, the computer says: nice try — check the explanation! 💻",
+"Almost a plot twist, {name}, but the textbook has the final word! 📚",
+"{name}, that answer needs a little debugging. 🛠️",
+"{name}, one small mistake today, one smarter answer next time! 🌟",
+"{name}, the correct option was waiting patiently for you. 😄",
+"{name}, let's call that a practice-round surprise. Remember this one! 🧠",
+"{name}, the answer clicked… just not the right one! 📱",
+"{name}, a little practice now means a stronger answer next time! ✨"
+];
+let index=0, score=0, locked=false, advanceTimer=null;
+const answers=[];
+const $=id=>document.getElementById(id);
+function safe(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function name(){return $('studentName').value.trim()||'Student';}
+function draw(){
+ const q=questions[index];locked=false;
+ $('feedback').className='feedback';$('feedback').innerHTML='';$('nextBtn').disabled=true;
+ $('stepLabel').textContent=`Question ${index+1} of ${questions.length}`;$('liveScore').textContent=`Score: ${score}`;
+ $('barFill').style.width=(index/questions.length*100)+'%';
+ $('quiz').innerHTML=`<span class="topic">${q.t}</span><div class="qhead"><div class="number">${index+1}</div><div class="question">${q.q}</div></div><div class="options">${q.o.map((v,j)=>`<label class="option" id="option${j}"><input type="radio" name="answer" value="${j}"><span>${String.fromCharCode(65+j)}. ${v}</span></label>`).join('')}</div>`;
+ document.querySelectorAll('input[name="answer"]').forEach(el=>el.addEventListener('change',()=>check(Number(el.value))));
 }
-
-function submitQuiz() {
-  let score = 0;
-  const quiz = document.getElementById("quiz");
-
-  document.querySelectorAll(".feedback").forEach(e => e.remove());
-  document.querySelectorAll(".question-card").forEach(e => {
-    e.classList.remove("correct","incorrect");
-  });
-
-  quizData.forEach((item, i) => {
-    const qCard = document.querySelector(`.question-card[data-index="${i}"]`);
-    const chosen = document.querySelector(`input[name="q${i}"]:checked`);
-    const fb = document.createElement("div");
-    fb.className = "feedback";
-
-    if (!chosen) {
-      fb.textContent = "Not answered.";
-      fb.classList.add("incorrect-text");
-      qCard.classList.add("incorrect");
-    } else if (parseInt(chosen.value) === item.a) {
-      score++;
-      fb.textContent = "Correct!";
-      fb.classList.add("correct-text");
-      qCard.classList.add("correct");
-    } else {
-      fb.textContent = "Incorrect. Correct answer: " + item.o[item.a];
-      fb.classList.add("incorrect-text");
-      qCard.classList.add("incorrect");
-    }
-    qCard.appendChild(fb);
-  });
-
-  const result = document.getElementById("result");
-  result.style.display = "block";
-  result.textContent = `Your Score: ${score} / 50`;
+function check(choice){
+ if(locked)return;locked=true;const q=questions[index];answers[index]=choice;
+ const good=choice===q.a;if(good)score++;
+ document.querySelectorAll('input[name="answer"]').forEach(el=>el.disabled=true);
+ q.o.forEach((_,j)=>{const el=$('option'+j);if(j===q.a)el.classList.add('correct');if(j===choice&&!good)el.classList.add('wrong');});
+ const fb=$('feedback');fb.className='feedback show '+(good?'good':'bad');
+ if(good)fb.innerHTML=`<strong>✅ Correct, ${safe(name())}! Very good! 🌟</strong>${q.e}`;
+ else{
+  const line=q.n?`${safe(name())}, this was not covered in class, but now you know! ✨`:comic[(index*7+3)%comic.length].replaceAll('{name}',safe(name()));
+  fb.innerHTML=`<strong>❌ Not quite! ${line}</strong><div><b>Correct answer:</b> ${String.fromCharCode(65+q.a)}. ${q.o[q.a]}</div><div>${q.e}</div>`;
+ }
+ $('liveScore').textContent=`Score: ${score}`;$('barFill').style.width=((index+1)/questions.length*100)+'%';
+ $('nextBtn').disabled=false;$('nextBtn').textContent=index===questions.length-1?'View Scorecard →':'Next Question →';
+ clearTimeout(advanceTimer);advanceTimer=setTimeout(next,2400);
 }
-
-function resetQuiz() {
-  document.querySelectorAll("input[type=radio]").forEach(e => e.checked = false);
-  document.querySelectorAll(".feedback").forEach(e => e.remove());
-  document.querySelectorAll(".question-card").forEach(e => {
-    e.classList.remove("correct","incorrect");
-  });
-  document.getElementById("result").style.display = "none";
+function next(){if(!locked)return;index++;if(index<questions.length){draw();$('quizCard').scrollIntoView({behavior:'smooth',block:'start'});}else result();}
+function result(){
+ $('quizCard').style.display='none';$('progressCard').style.display='none';
+ const nm=name(),cl=$('studentClass').value,sec=$('studentSection').value||'Not selected',wrong=questions.length-score,pct=Math.round(score/questions.length*100);
+ $('studentLine').textContent=`${nm} · Class ${cl} · Section ${sec}`;
+ $('scoreNumber').textContent=`${score} / ${questions.length}`;$('correctCount').textContent=score;$('wrongCount').textContent=wrong;$('percentCount').textContent=pct+'%';
+ $('scoreMessage').textContent=pct>=90?'Outstanding! You really know your stuff. 🌟':pct>=70?'Good effort! A little revision will make it even better. 👍':pct>=50?'You’re getting there — revise the explanations and try again. 📘':'No stress! Review the answers and give it another go. 💪';
+ $('review').innerHTML=questions.map((q,i)=>`<div class="review"><b>Q${i+1}. ${q.q}</b><div class="muted">Your answer: ${String.fromCharCode(65+answers[i])}. ${q.o[answers[i]]}</div><div style="color:${answers[i]===q.a?'#15803d':'#b91c1c'}"><b>${answers[i]===q.a?'Correct':'Incorrect'}.</b> Correct answer: ${String.fromCharCode(65+q.a)}. ${q.o[q.a]}</div><div>${q.e}</div></div>`).join('');
+ $('result').style.display='block';$('result').scrollIntoView({behavior:'smooth'});
 }
-
-loadQuiz();
+function reset(){
+ clearTimeout(advanceTimer);index=0;score=0;locked=false;answers.length=0;$('result').style.display='none';$('quizCard').style.display='block';$('progressCard').style.display='block';draw();window.scrollTo({top:0,behavior:'smooth'});
+}
+$('tryAgainBtn').addEventListener('click',reset);
+draw();
 </script>
-
-</body>
-</html>
+</body></html>
